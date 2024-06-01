@@ -6,7 +6,10 @@ using System.Threading.Tasks;
 
 namespace Domain
 {
-    internal class ShipperDTO
+    public class ShipperDTO
     {
+        public int ShipperID { get; set; }
+        public string CompanyName { get; set; }
+        public string Phone { get; set; }
     }
 }
