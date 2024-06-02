@@ -129,5 +129,22 @@ namespace DataLayer
         {
             return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction<Ten_Most_Expensive_Products_Result>("Ten_Most_Expensive_Products");
         }
+    
+        public virtual ObjectResult<spSearchOrders_Result> spSearchOrders(Nullable<int> employeeID, string customerID, Nullable<int> productID)
+        {
+            var employeeIDParameter = employeeID.HasValue ?
+                new ObjectParameter("EmployeeID", employeeID) :
+                new ObjectParameter("EmployeeID", typeof(int));
+    
+            var customerIDParameter = customerID != null ?
+                new ObjectParameter("CustomerID", customerID) :
+                new ObjectParameter("CustomerID", typeof(string));
+    
+            var productIDParameter = productID.HasValue ?
+                new ObjectParameter("ProductID", productID) :
+                new ObjectParameter("ProductID", typeof(int));
+    
+            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction<spSearchOrders_Result>("spSearchOrders", employeeIDParameter, customerIDParameter, productIDParameter);
+        }
     }
 }

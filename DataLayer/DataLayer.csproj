@@ -69,6 +69,7 @@
     <Compile Include="CustomerDemographic.cs">
       <DependentUpon>Database.tt</DependentUpon>
     </Compile>
+    <Compile Include="CustomerDL.cs" />
     <Compile Include="Customer_and_Suppliers_by_City.cs">
       <DependentUpon>Database.tt</DependentUpon>
     </Compile>
@@ -99,15 +100,19 @@
     <Compile Include="Employee.cs">
       <DependentUpon>Database.tt</DependentUpon>
     </Compile>
+    <Compile Include="EmployeeDL.cs" />
     <Compile Include="Employee_Sales_by_Country_Result.cs">
       <DependentUpon>Database.tt</DependentUpon>
     </Compile>
     <Compile Include="Invoice.cs">
       <DependentUpon>Database.tt</DependentUpon>
     </Compile>
+    <Compile Include="Mapper.cs" />
     <Compile Include="Order.cs">
       <DependentUpon>Database.tt</DependentUpon>
     </Compile>
+    <Compile Include="OrderDetailsDL.cs" />
+    <Compile Include="OrderDL.cs" />
     <Compile Include="Orders_Qry.cs">
       <DependentUpon>Database.tt</DependentUpon>
     </Compile>
@@ -123,6 +128,7 @@
     <Compile Include="Product.cs">
       <DependentUpon>Database.tt</DependentUpon>
     </Compile>
+    <Compile Include="ProductDL.cs" />
     <Compile Include="Products_Above_Average_Price.cs">
       <DependentUpon>Database.tt</DependentUpon>
     </Compile>
@@ -149,6 +155,10 @@
       <DependentUpon>Database.tt</DependentUpon>
     </Compile>
     <Compile Include="Shipper.cs">
+      <DependentUpon>Database.tt</DependentUpon>
+    </Compile>
+    <Compile Include="ShipperDL.cs" />
+    <Compile Include="spSearchOrders_Result.cs">
       <DependentUpon>Database.tt</DependentUpon>
     </Compile>
     <Compile Include="Summary_of_Sales_by_Quarter.cs">
@@ -194,6 +204,12 @@
   </ItemGroup>
   <ItemGroup>
     <Service Include="{508349B6-6B84-4DF5-91F0-309BEEBAD82D}" />
+  </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\Domain\Domain.csproj">
+      <Project>{50C0587F-914A-48DA-8855-A10E08F776B9}</Project>
+      <Name>Domain</Name>
+    </ProjectReference>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>
