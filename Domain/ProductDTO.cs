@@ -6,21 +6,15 @@ using System.Threading.Tasks;
 
 namespace Domain
 {
-    public class OrderDTO
+    public class ProductDTO
     {
-        public int OrderID { get; set; }
-        public string CustomerID { get; set; }
-        public System.Nullable<int> EmployeeID { get; set; }
-        public System.Nullable<System.DateTime> OrderDate { get; set; }
-        public System.Nullable<System.DateTime> RequiredDate { get; set; }
-        public System.Nullable<System.DateTime> ShippedDate { get; set; }
-        public System.Nullable<int> ShipVia { get; set; }
-        public System.Nullable<decimal> Freight { get; set; }
-        public string ShipName { get; set; }
-        public string ShipAddress { get; set; }
-        public string ShipCity { get; set; }
-        public string ShipRegion { get; set; }
-        public string ShipPostalCode { get; set; }
-        public string ShipCountry { get; set; }
+        public int ProductID { get; set; }
+        public string ProductName { get; set; }
+        public string QuantityPerUnit { get; set; }
+        public System.Nullable<decimal> UnitPrice { get; set; }
+        public System.Nullable<short> UnitsInStock { get; set; }
+        public System.Nullable<short> UnitsOnOrder { get; set; }
+        public System.Nullable<short> ReorderLevel { get; set; }
+        public bool Discontinued { get; set; }
     }
 }
