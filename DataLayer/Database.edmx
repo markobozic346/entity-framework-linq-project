@@ -4,7 +4,7 @@
   <edmx:Runtime>
     <!-- SSDL content -->
     <edmx:StorageModels>
-      <Schema Namespace="northwindModel.Store" Provider="System.Data.SqlClient" ProviderManifestToken="2012" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
+    <Schema Namespace="northwindModel.Store" Provider="System.Data.SqlClient" ProviderManifestToken="2012" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
         <EntityType Name="Categories">
           <Key>
             <PropertyRef Name="CategoryID" />
@@ -345,14 +345,6 @@ warning 6002: The table/view 'northwind.dbo.Products by Category' does not have 
           <Property Name="Discontinued" Type="bit" Nullable="false" />
         </EntityType>
         <!--Errors Found During Generation:
-warning 6013: The table/view 'northwind.dbo.Quarterly Orders' does not have a primary key defined and no valid primary key could be inferred. This table/view has been excluded. To use the entity, you will need to review your schema, add the correct keys, and uncomment it.
-        <EntityType Name="Quarterly Orders">
-          <Property Name="CustomerID" Type="nchar" MaxLength="5" />
-          <Property Name="CompanyName" Type="nvarchar" MaxLength="40" />
-          <Property Name="City" Type="nvarchar" MaxLength="15" />
-          <Property Name="Country" Type="nvarchar" MaxLength="15" />
-        </EntityType>-->
-        <!--Errors Found During Generation:
 warning 6002: The table/view 'northwind.dbo.Sales by Category' does not have a primary key defined. The key has been inferred and the definition was created as a read-only table/view.-->
         <EntityType Name="Sales by Category">
           <Key>
@@ -574,6 +566,11 @@ warning 6002: The table/view 'northwind.dbo.Summary of Sales by Year' does not h
         <Function Name="SalesByCategory" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
           <Parameter Name="CategoryName" Type="nvarchar" Mode="In" />
           <Parameter Name="OrdYear" Type="nvarchar" Mode="In" />
+        </Function>
+        <Function Name="spSearchOrders" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+          <Parameter Name="EmployeeID" Type="int" Mode="In" />
+          <Parameter Name="CustomerID" Type="nvarchar" Mode="In" />
+          <Parameter Name="ProductID" Type="int" Mode="In" />
         </Function>
         <Function Name="Ten_Most_Expensive_Products" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo" StoreFunctionName="Ten Most Expensive Products" />
         <EntityContainer Name="northwindModelStoreContainer">
@@ -801,8 +798,7 @@ warning 6002: The table/view 'northwind.dbo.Summary of Sales by Year' does not h
             <End Role="Territories" EntitySet="Territories" />
           </AssociationSet>
         </EntityContainer>
-      </Schema>
-    </edmx:StorageModels>
+      </Schema></edmx:StorageModels>
     <!-- CSDL content -->
     <edmx:ConceptualModels>
       <Schema Namespace="northwindModel" Alias="Self" annotation:UseStrongSpatialTypes="false" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm">
@@ -1354,13 +1350,13 @@ warning 6002: The table/view 'northwind.dbo.Summary of Sales by Year' does not h
             <End Role="Territories" EntitySet="Territories" />
           </AssociationSet>
           <FunctionImport Name="CustOrderHist" ReturnType="Collection(northwindModel.CustOrderHist_Result)">
-            <Parameter Name="CustomerID" Mode="In" Type="String" />
+          <Parameter Name="CustomerID" Mode="In" Type="String" />
           </FunctionImport>
           <FunctionImport Name="CustOrdersDetail" ReturnType="Collection(northwindModel.CustOrdersDetail_Result)">
-            <Parameter Name="OrderID" Mode="In" Type="Int32" />
+          <Parameter Name="OrderID" Mode="In" Type="Int32" />
           </FunctionImport>
           <FunctionImport Name="CustOrdersOrders" ReturnType="Collection(northwindModel.CustOrdersOrders_Result)">
-            <Parameter Name="CustomerID" Mode="In" Type="String" />
+          <Parameter Name="CustomerID" Mode="In" Type="String" />
           </FunctionImport>
           <FunctionImport Name="Employee_Sales_by_Country" ReturnType="Collection(northwindModel.Employee_Sales_by_Country_Result)">
             <Parameter Name="Beginning_Date" Mode="In" Type="DateTime" />
@@ -1376,6 +1372,11 @@ warning 6002: The table/view 'northwind.dbo.Summary of Sales by Year' does not h
             <Parameter Name="OrdYear" Mode="In" Type="String" />
           </FunctionImport>
           <FunctionImport Name="Ten_Most_Expensive_Products" ReturnType="Collection(northwindModel.Ten_Most_Expensive_Products_Result)" />
+          <FunctionImport Name="spSearchOrders" ReturnType="Collection(northwindModel.spSearchOrders_Result)">
+            <Parameter Name="EmployeeID" Mode="In" Type="Int32" />
+            <Parameter Name="CustomerID" Mode="In" Type="String" />
+            <Parameter Name="ProductID" Mode="In" Type="Int32" />
+          </FunctionImport>
         </EntityContainer>
         <ComplexType Name="CustOrderHist_Result">
           <Property Type="String" Name="ProductName" Nullable="false" MaxLength="40" />
@@ -1415,6 +1416,22 @@ warning 6002: The table/view 'northwind.dbo.Summary of Sales by Year' does not h
         <ComplexType Name="Ten_Most_Expensive_Products_Result">
           <Property Type="String" Name="TenMostExpensiveProducts" Nullable="false" MaxLength="40" />
           <Property Type="Decimal" Name="UnitPrice" Nullable="true" Precision="19" />
+        </ComplexType>
+        <ComplexType Name="spSearchOrders_Result">
+          <Property Type="Int32" Name="OrderID" Nullable="false" />
+          <Property Type="String" Name="CustomerID" Nullable="true" MaxLength="5" />
+          <Property Type="Int32" Name="EmployeeID" Nullable="true" />
+          <Property Type="DateTime" Name="OrderDate" Nullable="true" Precision="23" />
+          <Property Type="DateTime" Name="RequiredDate" Nullable="true" Precision="23" />
+          <Property Type="DateTime" Name="ShippedDate" Nullable="true" Precision="23" />
+          <Property Type="Int32" Name="ShipVia" Nullable="true" />
+          <Property Type="Decimal" Name="Freight" Nullable="true" Precision="19" />
+          <Property Type="String" Name="ShipName" Nullable="true" MaxLength="40" />
+          <Property Type="String" Name="ShipAddress" Nullable="true" MaxLength="60" />
+          <Property Type="String" Name="ShipCity" Nullable="true" MaxLength="15" />
+          <Property Type="String" Name="ShipRegion" Nullable="true" MaxLength="15" />
+          <Property Type="String" Name="ShipPostalCode" Nullable="true" MaxLength="10" />
+          <Property Type="String" Name="ShipCountry" Nullable="true" MaxLength="15" />
         </ComplexType>
       </Schema>
     </edmx:ConceptualModels>
@@ -1844,6 +1861,26 @@ warning 6002: The table/view 'northwind.dbo.Summary of Sales by Year' does not h
               </ComplexTypeMapping>
             </ResultMapping>
           </FunctionImportMapping>
+          <FunctionImportMapping FunctionImportName="spSearchOrders" FunctionName="northwindModel.Store.spSearchOrders">
+            <ResultMapping>
+              <ComplexTypeMapping TypeName="northwindModel.spSearchOrders_Result">
+                <ScalarProperty Name="OrderID" ColumnName="OrderID" />
+                <ScalarProperty Name="CustomerID" ColumnName="CustomerID" />
+                <ScalarProperty Name="EmployeeID" ColumnName="EmployeeID" />
+                <ScalarProperty Name="OrderDate" ColumnName="OrderDate" />
+                <ScalarProperty Name="RequiredDate" ColumnName="RequiredDate" />
+                <ScalarProperty Name="ShippedDate" ColumnName="ShippedDate" />
+                <ScalarProperty Name="ShipVia" ColumnName="ShipVia" />
+                <ScalarProperty Name="Freight" ColumnName="Freight" />
+                <ScalarProperty Name="ShipName" ColumnName="ShipName" />
+                <ScalarProperty Name="ShipAddress" ColumnName="ShipAddress" />
+                <ScalarProperty Name="ShipCity" ColumnName="ShipCity" />
+                <ScalarProperty Name="ShipRegion" ColumnName="ShipRegion" />
+                <ScalarProperty Name="ShipPostalCode" ColumnName="ShipPostalCode" />
+                <ScalarProperty Name="ShipCountry" ColumnName="ShipCountry" />
+              </ComplexTypeMapping>
+            </ResultMapping>
+          </FunctionImportMapping>
         </EntityContainerMapping>
       </Mapping>
     </edmx:Mappings>
@@ -1858,8 +1895,8 @@ warning 6002: The table/view 'northwind.dbo.Summary of Sales by Year' does not h
     <Options>
       <DesignerInfoPropertySet>
         <DesignerProperty Name="ValidateOnBuild" Value="true" />
-        <DesignerProperty Name="EnablePluralization" Value="true" />
-        <DesignerProperty Name="IncludeForeignKeysInModel" Value="true" />
+        <DesignerProperty Name="EnablePluralization" Value="False" />
+        <DesignerProperty Name="IncludeForeignKeysInModel" Value="False" />
         <DesignerProperty Name="UseLegacyProvider" Value="false" />
         <DesignerProperty Name="CodeGenerationStrategy" Value="None" />
       </DesignerInfoPropertySet>
