@@ -41,10 +41,13 @@
             this.cmbProduct = new System.Windows.Forms.ComboBox();
             this.lblQuantity = new System.Windows.Forms.Label();
             this.lbl = new System.Windows.Forms.Label();
-            this.btnUpdateOrder = new System.Windows.Forms.Button();
+            this.btnUpdateItem = new System.Windows.Forms.Button();
             this.txtPrice = new System.Windows.Forms.TextBox();
             this.txtQuantity = new System.Windows.Forms.TextBox();
             this.txtDiscount = new System.Windows.Forms.TextBox();
+            this.dataGrid = new System.Windows.Forms.DataGridView();
+            this.btnUpdateOrder = new System.Windows.Forms.Button();
+            ((System.ComponentModel.ISupportInitialize)(this.dataGrid)).BeginInit();
             this.SuspendLayout();
             // 
             // lblEmployee
@@ -160,15 +163,15 @@
             this.lbl.TabIndex = 34;
             this.lbl.Text = "Discount";
             // 
-            // btnUpdateOrder
+            // btnUpdateItem
             // 
-            this.btnUpdateOrder.Location = new System.Drawing.Point(583, 192);
-            this.btnUpdateOrder.Name = "btnUpdateOrder";
-            this.btnUpdateOrder.Size = new System.Drawing.Size(138, 24);
-            this.btnUpdateOrder.TabIndex = 35;
-            this.btnUpdateOrder.Text = "Update Item";
-            this.btnUpdateOrder.UseVisualStyleBackColor = true;
-            this.btnUpdateOrder.Click += new System.EventHandler(this.btnUpdateOrder_Click);
+            this.btnUpdateItem.Location = new System.Drawing.Point(600, 192);
+            this.btnUpdateItem.Name = "btnUpdateItem";
+            this.btnUpdateItem.Size = new System.Drawing.Size(138, 24);
+            this.btnUpdateItem.TabIndex = 35;
+            this.btnUpdateItem.Text = "Update Item";
+            this.btnUpdateItem.UseVisualStyleBackColor = true;
+            this.btnUpdateItem.Click += new System.EventHandler(this.btnUpdateOrder_Click);
             // 
             // txtPrice
             // 
@@ -191,16 +194,39 @@
             this.txtDiscount.Size = new System.Drawing.Size(121, 22);
             this.txtDiscount.TabIndex = 38;
             // 
+            // dataGrid
+            // 
+            this.dataGrid.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
+            this.dataGrid.Location = new System.Drawing.Point(31, 242);
+            this.dataGrid.Name = "dataGrid";
+            this.dataGrid.RowHeadersWidth = 51;
+            this.dataGrid.RowTemplate.Height = 24;
+            this.dataGrid.Size = new System.Drawing.Size(707, 150);
+            this.dataGrid.TabIndex = 40;
+            this.dataGrid.SelectionChanged += new System.EventHandler(this.DataGrid_SelectionChanged);
+            // 
+            // btnUpdateOrder
+            // 
+            this.btnUpdateOrder.Location = new System.Drawing.Point(629, 71);
+            this.btnUpdateOrder.Name = "btnUpdateOrder";
+            this.btnUpdateOrder.Size = new System.Drawing.Size(75, 23);
+            this.btnUpdateOrder.TabIndex = 41;
+            this.btnUpdateOrder.Text = "Update Order";
+            this.btnUpdateOrder.UseVisualStyleBackColor = true;
+            this.btnUpdateOrder.Click += new System.EventHandler(this.btnUpdateOrder_Click_1);
+            // 
             // frmEditOrder
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(8F, 16F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(800, 265);
+            this.ClientSize = new System.Drawing.Size(800, 436);
+            this.Controls.Add(this.btnUpdateOrder);
+            this.Controls.Add(this.dataGrid);
             this.Controls.Add(this.lblPrice);
             this.Controls.Add(this.txtDiscount);
             this.Controls.Add(this.txtQuantity);
             this.Controls.Add(this.txtPrice);
-            this.Controls.Add(this.btnUpdateOrder);
+            this.Controls.Add(this.btnUpdateItem);
             this.Controls.Add(this.lbl);
             this.Controls.Add(this.lblQuantity);
             this.Controls.Add(this.cmbProduct);
@@ -216,6 +242,7 @@
             this.Name = "frmEditOrder";
             this.Text = "Edit Order";
             this.Load += new System.EventHandler(this.frmEditOrder_Load);
+            ((System.ComponentModel.ISupportInitialize)(this.dataGrid)).EndInit();
             this.ResumeLayout(false);
             this.PerformLayout();
 
@@ -236,9 +263,11 @@
         private System.Windows.Forms.ComboBox cmbProduct;
         private System.Windows.Forms.Label lblQuantity;
         private System.Windows.Forms.Label lbl;
-        private System.Windows.Forms.Button btnUpdateOrder;
+        private System.Windows.Forms.Button btnUpdateItem;
         private System.Windows.Forms.TextBox txtPrice;
         private System.Windows.Forms.TextBox txtQuantity;
         private System.Windows.Forms.TextBox txtDiscount;
+        private System.Windows.Forms.DataGridView dataGrid;
+        private System.Windows.Forms.Button btnUpdateOrder;
     }
 }

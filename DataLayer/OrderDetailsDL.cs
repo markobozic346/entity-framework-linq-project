@@ -55,5 +55,12 @@ namespace DataLayer
             return Mapper.MapToDTO(orderDetails[0]);
 
         }
+
+        public List<OrderDetailsDTO> GetAllByOrder(int OrderId)
+        {
+            var details = _context.Order_Details.Where(od => od.OrderID == OrderId).ToList();
+
+            return Mapper.convertToList(details);
+        }
     }
 }

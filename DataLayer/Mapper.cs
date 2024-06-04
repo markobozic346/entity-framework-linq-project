@@ -207,6 +207,14 @@ namespace DataLayer
             return l;
         }
 
+        public static List<OrderDetailsDTO> convertToList(List<Order_Detail> oList)
+        {
+            List<OrderDetailsDTO> l = new List<OrderDetailsDTO>();
+            foreach (Order_Detail o in oList)
+                l.Add(MapToDTO(o));
+
+            return l;
+        }
         public static List<OrderDTO> convertToList(List<Order> oList)
         {
             List<OrderDTO> l = new List<OrderDTO>();

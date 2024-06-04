@@ -35,5 +35,10 @@ namespace BusinessLayer
         {
             return _orderDetailsDl.GetSingle(empId);
         }
+
+        public List<OrderDetailsDTO> GetAllByOrder(int OrderId)
+        {
+            return _orderDetailsDl.GetAllByOrder(OrderId);
+        }
     }
 }

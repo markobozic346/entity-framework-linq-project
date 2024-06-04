@@ -16,11 +16,14 @@ namespace DrugiKolokvijumZadatak
     {
 
         int orderDetailID;
+        OrderDetailsBL orderDetailsBl;
+
         public frmPreviewOrderDetail(int orderDetailId)
         {
             InitializeComponent();
 
             orderDetailID = orderDetailId;
+            orderDetailsBl = new OrderDetailsBL();
         }
 
         private void frmPreviewOrderDetail_Load(object sender, EventArgs e)
@@ -29,10 +32,8 @@ namespace DrugiKolokvijumZadatak
             ProductDTO product = new ProductBL().getProduct(orderDetail.ProductID);
 
             lblProductName.Text = product.ProductName;
-            lblQuantity.Text = orderDetail.Quantity.ToString();
-            lblDiscount.Text = (orderDetail.Discount * 100).ToString() + "%";
-            lblPrice.Text = orderDetail.UnitPrice.ToString();
 
+            dataGrid.DataSource = orderDetailsBl.GetAllByOrder(orderDetailID);
         }
     }
 }
