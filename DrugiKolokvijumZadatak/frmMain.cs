@@ -47,7 +47,7 @@ namespace DrugiKolokvijumZadatak
                     selectedProductId = (int)cmbProduct.SelectedValue;
                 }
 
-                var results = db.spSearchOrders(selectedEmployeeId, selectedCustomerId, selectedProductId).ToList();
+            var results = db.spSearchOrders(selectedEmployeeId, selectedCustomerId, selectedProductId).GroupBy(o => o.OrderID).Select(g => g.First()).ToList();
                 dataGrid.DataSource = results;
 
         }
